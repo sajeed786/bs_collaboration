@@ -1,0 +1,26 @@
+{
+  "name": "buyer_supplier_poc",
+  "version": "1.0.0",
+  "description": "demo html login for buyer",
+  "main": "server_login.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sajeed",
+  "license": "ISC",
+  "dependencies": {
+    "jade": "^1.11.0",
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.1",
+    "express": "^4.16.4",
+    "express-handlebars": "*",
+    "express-session": "^1.15.6",
+    "express-validator": "*",
+    "mongodb": "*",
+    "mongoose": "^5.4.1",
+    "passport": "^0.4.0",
+    "passport-http": "*",
+    "passport-local": "^1.0.0"
+  }
+}

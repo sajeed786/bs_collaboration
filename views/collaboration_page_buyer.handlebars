@@ -1,0 +1,184 @@
+<h2 class = "text-center"> Buyer-Supplier Collaboration Portal </h2>
+
+ 
+
+  <div class="container">
+
+    <form id = "send_request" method = "post" action = "/buyer_send">
+      <div class = "col-50">
+
+        <div class = "row">
+
+          <div class="col-sm-3">
+
+            <label for = "Area"> GEO: </label>
+
+          </div>
+
+          <div class="col-sm-9">
+
+            <select id="location" name="country">
+
+                <option value="australia">Australia</option>
+
+                <option value="north america">North America</option>
+
+                <option value="south america">SOuth America</option>
+
+                <option value="africa">Africa</option>
+
+                <option value="asia">Asia</option>
+
+                <option value="europe">Europe</option>
+
+                <option value="antarctica">Antarctica</option>
+
+            </select>
+
+          </div>
+
+       </div>
+
+ 
+
+       <div class = "row">
+
+        <div class = "col-sm-9">
+
+          <div class = "row">
+
+              <label for = "Message"> Message to Suppliers </label>
+
+              <textarea id="msg_content" name="content" placeholder="Write something.." style="height:200px"></textarea>
+
+          </div>
+
+          <div class = "row">
+
+              <div class = "col-sm-9">
+
+                <input type = "file" name = "file_upload" id = "file_upload">
+
+              </div>
+
+              <div class = "col-sm-3">
+
+                <input type = "submit" value = "Upload File">
+
+              </div>
+
+          </div>
+
+        </div>
+
+ 
+
+        <div class = "col-sm-3 send">
+
+          <input type = "submit" style = "margin-top: 175%" value = "Send Request">
+
+        </div>
+
+        </div>
+
+ 
+
+      </div>
+
+ 
+
+      <div class = "col-50">
+
+          <div class = "row">
+
+              <label for = "suppliers">Identify the Suppliers: </label>
+
+          </div>
+
+          <div class = "row  container_supplierlist">
+
+              <div class = "row">
+
+                  <div class="col-sm-3">
+
+                      <label for = "supp_1"> Supplier 1 </label>
+
+                  </div>
+
+                  <div class="col-sm-9">
+
+                      <select id="supp1" name="supplier_1">
+
+                          <option value="abb">ABB Corp</option>
+
+                          <option value="louis">Louis Stores</option>
+
+                          <option value="kingston">Kingston Electronics</option>
+
+                      </select>
+
+                  </div>
+
+              </div>
+
+ 
+
+              <div class = "row">
+
+                  <div class="col-sm-3">
+
+                      <label for = "supp_2"> Supplier 2 </label>
+
+                  </div>
+
+                  <div class="col-sm-9">
+
+                      <select id="supp2" name="supplier_2">
+
+                          <option value="abb">ABB Corp</option>
+
+                          <option value="louis">Louis Stores</option>
+
+                          <option value="kingston">Kingston Electronics</option>
+
+                      </select>
+
+                  </div>
+
+              </div>
+
+ 
+
+              <div class = "row">
+
+                  <div class="col-sm-3">
+
+                      <label for = "supp_3"> Supplier 3 </label>
+
+                  </div>
+
+                  <div class="col-sm-9">
+
+                      <select id="supp3" name="supplier_3">
+
+                          <option value="abb">ABB Corp</option>
+
+                          <option value="louis">Louis Stores</option>
+
+                          <option value="kingston">Kingston Electronics</option>
+
+                      </select>
+
+                  </div>
+
+              </div>
+
+ 
+
+          </div>
+
+      </div>
+    </form>
+
+  </div>
+
