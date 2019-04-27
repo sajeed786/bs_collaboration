@@ -50,8 +50,6 @@ var UserSchema = mongoose.Schema({
 
 var User = module.exports = mongoose.model('User', UserSchema);
 
- 
-
 module.exports.createUser = function(newUser, callback){
 
                 bcrypt.genSalt(10, function(err, salt) {
@@ -87,8 +85,24 @@ module.exports.getUserById = function(id, callback){
 }
 
 
-
- 
+module.exports.getUserByCompany = function(recv, recv_id, role, callback){
+    var query = {company:recv, role:role};
+    User.findOne(query, function(err, user){
+        if(err){
+            callback(err);
+            return;
+        }
+        else{
+            if(user){
+                recv_id.push(user._id);
+                callback(null);
+            }
+            else{
+                console.log("user not found");
+            }
+        }
+    });
+}
 
 module.exports.comparePassword = function(candidatePassword, hash, callback){
 

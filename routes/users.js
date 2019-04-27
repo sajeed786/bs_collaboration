@@ -6,11 +6,13 @@ var passport = require('passport');
 
 var localStrategy = require('passport-local').Strategy;
 
-const querystring = require('querystring');    
+var mongoose = require('mongoose');
+//const querystring = require('querystring');    
  
+var db = mongoose.connection;
 
 var User = require('../models/user.js');
-
+var Ureq = require('../models/update_requests.js');
  
 
 router.get('/login',function(req,res){
@@ -202,22 +204,27 @@ router.post('/login',
   passport.authenticate('local' , {failureRedirect:'/login', failureFlash: true}),
 
   function(req, res) {
+    req.session.user = req.user;
     if(req.user.role === "Buyer"){
       res.redirect('/home?' + req.user.username);
     }else{
-      res.redirect('/supplier_collaborate?' + req.user.company);
+      var date;
+      
+      /* Ureq.findOne({supplier_id:req.user._id}, function(err,user){
+        if(err) throw err;
+
+        for(var i=0; i < user.data_exchange.length; i++)
+        {
+          var save_date = user.data_exchange;
+         // date = Date.now;
+            console.log("$$save_date.sender_id");
+            console.log(Date.now);
+        }
+
+      });
+ */      res.redirect('/supplier_collaborate?' + req.user.company);
     }
   });
-
-/* router.get('/Update', function(req, res){
-  User.updateOne({username: "Pdey"},
-  {
-    $set: {company : "IBM"}
-  },function(){
-    res.end('User updated');
-  }
-  );
-}); */
 
 function ensureAuthenticated(req, res, next){
 

@@ -26,7 +26,7 @@ var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/loginapp');
 
-var db = mongoose.connection;
+
 
  
 
