@@ -48,8 +48,51 @@ input[type=text], select, textarea{
   
   }
   
-  /* Style the container */
+  .header {
+
+    padding: 10px 16px;
   
+    background: #555;
+  
+    color: #f1f1f1;
+  
+  }
+  
+   
+  
+  .content {
+  
+    padding: 16px;
+  
+  }
+  
+   
+  
+  .notif_window1 {
+  
+  width: 500px;
+  
+  height: 200px;
+  
+  overflow: auto;
+  
+  background-color: lightblue;
+  
+   
+  
+  }
+  
+   
+  
+  .notif {
+  
+    border: 1px solid black;
+  
+    border-radius: 6px;
+  
+  }
+
+  /* Style the container */
   .container {
   
     border-radius: 5px;

@@ -29,7 +29,7 @@ router.post('/buyer_send', function(req,res){
                 var supp3 = req.body.supplier_3;
 
  
-
+                var send_time = new Date(Date.now());
                 var recv_list = [supp1, supp2, supp3];
 
                 var newRequest = new Nreq({
@@ -38,7 +38,9 @@ router.post('/buyer_send', function(req,res){
 
                                 message_title: msg_title,
 
-                                message_content: msg_content
+                                message_content: msg_content,
+
+                                send_date: send_time.toLocaleString()
 
                 });
 

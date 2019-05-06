@@ -53,34 +53,17 @@
                                                 </div>
 
                                                 <div class = "content">
-
+                                                    {{#each message}}
                                                                 <div class = "row" style = "padding-bottom: 20px">
 
-                                                                                <article class = "notif"></article>
+                                                                                <article class = "notif">
+                                                                                  {{this.msg_title}}<br>
+                                                                                  {{this.msg_body}}
+                                                                                </article>
 
                                                                 </div>
-
-                                                                <div class = "row" style = "padding-bottom: 20px">
-
-                                                                                <article class = "notif"> Margins and Padding. margin and padding are the two most commonly used properties for spacing-out elements. A margin is the space outside something, whereas padding is the space inside something.
-                                                                                     Change the CSS code for h2 to the following: h2 { font-size: 1.5em; background-color: #ccc; margin: 20px; padding: 40px;</article>
-
-                                                                </div>
-
-                                                                <div class = "row" style = "padding-bottom: 20px">
-
-                                                                                <article class = "notif"> Margins and Padding. margin and padding are the two most commonly used properties for spacing-out elements. A margin is the space outside something, whereas padding is the space inside something. 
-                                                                                    Change the CSS code for h2 to the following: h2 { font-size: 1.5em; background-color: #ccc; margin: 20px; padding: 40px;</article>
-
-                                                                </div>
-
-                                                                <div class = "row" style = "padding-bottom: 20px">
-
-                                                                                <article class = "notif"> Margins and Padding. margin and padding are the two most commonly used properties for spacing-out elements. A margin is the space outside something, whereas padding is the space inside something.
-                                                                                     Change the CSS code for h2 to the following: h2 { font-size: 1.5em; background-color: #ccc; margin: 20px; padding: 40px;</article>
-
-                                                                </div>
-
+                                                    {{/each}}
+                                                                
                                                 </div>
 
                                 </div>

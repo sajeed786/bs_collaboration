@@ -42,11 +42,18 @@ var UserSchema = mongoose.Schema({
 
                                 type: String
 
-                }
+                },
 
+                last_login_date: {
+                                type: Date,
+                                default: Date.now
+                }
+ 
 });
 
- 
+UserSchema.statics.login = function login(id, callback) {
+    return this.findByIdAndUpdate(id, { $set : { 'last_login_date' : new Date(Date.now()),  new: true }}, callback);
+ };
 
 var User = module.exports = mongoose.model('User', UserSchema);
 
@@ -57,6 +64,7 @@ module.exports.createUser = function(newUser, callback){
     bcrypt.hash(newUser.password, salt, function(err, hash) {
 
                                newUser.password = hash;
+                               //newUser.last_login_date = (new Date(Date.now())).toLocaleString();
 
                                newUser.save(callback);
 

@@ -7,6 +7,8 @@ var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
 
 var mongoose = require('mongoose');
+
+var ObjectID = require('mongodb').ObjectID;
 //const querystring = require('querystring');    
  
 var db = mongoose.connection;
@@ -50,7 +52,9 @@ router.get('/home', ensureAuthenticated, function(req,res){
 });
 
 router.get('/supplier_collaborate', ensureAuthenticated, function(req, res){
-  res.render('collaboration_page_supplier', {supplier_name: req.user.company});
+  var message = req.session.message;
+  console.log(message);
+  res.render('collaboration_page_supplier', { supplier_name: req.user.company, message: message});
 }) 
 
 router.post('/register',  function (req, res) {
@@ -191,11 +195,10 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(id, done) {
 
-  User.getUserById(id, function(err, user) {
-
+  User.login(id, function(err, user) {
+    if(err) return done(err, null);
     done(err, user);
-
-  });
+   });
 
 });
 
@@ -205,24 +208,64 @@ router.post('/login',
 
   function(req, res) {
     req.session.user = req.user;
+    //console.log(new Date(Date.now()).toLocaleString());
     if(req.user.role === "Buyer"){
       res.redirect('/home?' + req.user.username);
     }else{
-      var date;
-      
-      /* Ureq.findOne({supplier_id:req.user._id}, function(err,user){
-        if(err) throw err;
+  
+      //console.log(req.user.last_login_date);
+      //console.log(new Date(Date.now()));
+      Ureq.aggregate([
 
-        for(var i=0; i < user.data_exchange.length; i++)
+        {$match:
+
+          {
+
+            $and: [ 
+              {supplier_id: new ObjectID(req.user._id)},
+              {'data_exchange.time_exc': {$gt: req.user.last_login_date, $lte: new Date(Date.now())}}
+            ]
+          }
+
+        },
+
         {
-          var save_date = user.data_exchange;
-         // date = Date.now;
-            console.log("$$save_date.sender_id");
-            console.log(Date.now);
+
+          $unwind: "$data_exchange"
+
+        },
+
+        {
+           $project:
+
+          {
+
+            _id: 0,
+
+            req_id: 1,
+
+            sender_id: "$data_exchange.sender_id",
+
+            receiver_id: "$data_exchange.receiver_id",
+
+            msg_title: "$data_exchange.message_sub",
+
+            msg_body: "$data_exchange.message_content"
+
+          }
+
         }
 
-      });
- */      res.redirect('/supplier_collaborate?' + req.user.company);
+      ],
+      function(err, upd){
+        if(err) throw err;
+
+        //console.log(upd);
+        req.session.message = upd;
+        res.redirect('/supplier_collaborate');
+      }
+      ); 
+     // res.redirect('/supplier_collaborate?' + req.user.company);
     }
   });
 

@@ -39,7 +39,7 @@ var Req_updateSchema = mongoose.Schema({
 
             time_exc: {
                 type: Date,
-                default: Date.now
+                //default: Date.now
             }
 
         }
@@ -52,6 +52,7 @@ module.exports.saveModel = function(req_id, recv_id, sender_id, sender_role, rol
     
     for(var i = 0; i<3; i++)
     {
+        var save_time = new Date(Date.now());
         var update = new Req_update({
             req_id: req_id,
             supplier_id: recv_id[i],
@@ -62,7 +63,8 @@ module.exports.saveModel = function(req_id, recv_id, sender_id, sender_role, rol
                     receiver_id: recv_id[i],
                     receiver_role: role,
                     message_sub: msg_title,
-                    message_content: msg_content
+                    message_content: msg_content,
+                    time_exc: save_time.toLocaleString()
                 }
             ]
         });
