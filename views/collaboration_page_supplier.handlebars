@@ -54,12 +54,17 @@
 
                                                 <div class = "content">
                                                     {{#each message}}
-                                                                <div class = "row" style = "padding-bottom: 20px">
-
-                                                                                <article class = "notif">
+                                                                <div id = "{{this.msg_id}}" class = "row" style = "padding-bottom: 20px">
+                                                                  <div class = "row" >
+                                                                                <article class = "notif" style = "padding-left:20px">
                                                                                   {{this.msg_title}}<br>
                                                                                   {{this.msg_body}}
                                                                                 </article>
+                                                                  </div>
+
+                                                                  <div class = "row">
+                                                                    <input type = "button" id = "mark_seen" value = "Mark as seen" class = "btn-primary btn-block" style = "width:10%" onclick = 'hide_save("{{this.msg_id}}")' />
+                                                                  </div>
 
                                                                 </div>
                                                     {{/each}}
@@ -71,3 +76,5 @@
                 </div>
 
 </div>
+
+<script type = "text/javascript", src = "js/mark_as_seen.js"></script>

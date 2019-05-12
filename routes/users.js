@@ -53,9 +53,10 @@ router.get('/home', ensureAuthenticated, function(req,res){
 
 router.get('/supplier_collaborate', ensureAuthenticated, function(req, res){
   var message = req.session.message;
-  console.log(message);
+ // console.log(message);
   res.render('collaboration_page_supplier', { supplier_name: req.user.company, message: message});
 }) 
+
 
 router.post('/register',  function (req, res) {
 
@@ -223,7 +224,8 @@ router.post('/login',
 
             $and: [ 
               {supplier_id: new ObjectID(req.user._id)},
-              {'data_exchange.time_exc': {$gt: req.user.last_login_date, $lte: new Date(Date.now())}}
+              {'data_exchange.time_exc': {$lte: new Date(Date.now())}},
+              {'data_exchange.seen': false}
             ]
           }
 
@@ -243,6 +245,8 @@ router.post('/login',
             _id: 0,
 
             req_id: 1,
+
+            msg_id: "$data_exchange._id",
 
             sender_id: "$data_exchange.sender_id",
 
@@ -267,6 +271,23 @@ router.post('/login',
       ); 
      // res.redirect('/supplier_collaborate?' + req.user.company);
     }
+  });
+
+router.put('/supplier_collaborate', function(req,res){
+  
+    Ureq.findOneAndUpdate(
+      {supplier_id: new ObjectID(req.session.user._id),'data_exchange._id': new ObjectID(req.body.msg_id)},
+      {
+        $set: {'data_exchange.$.seen': true}
+      },
+      {returnNewDocument: true},
+      function(err, doc){
+        if(err)
+        {
+          console.log('Could not update the database');
+        }
+      }
+    );
   });
 
 function ensureAuthenticated(req, res, next){

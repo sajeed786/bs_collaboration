@@ -40,6 +40,10 @@ var Req_updateSchema = mongoose.Schema({
             time_exc: {
                 type: Date,
                 //default: Date.now
+            },
+            seen: {
+                type: Boolean,
+                default: false
             }
 
         }
